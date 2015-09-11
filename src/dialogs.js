@@ -438,9 +438,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 				create : function(url,ctrlr,data,opts,ctrlAs){
 					var copy = (opts && angular.isDefined(opts.copy)) ? opts.copy : _copy;
 					opts = _setOpts(opts);
-					if(!opts.resolve)
-						opts.resolve = {};
-						opts.resolve.data = function() {
+					resolve.data = function() {
 						if(copy)
 							return angular.copy(data);
 						else
