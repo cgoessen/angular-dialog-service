@@ -438,6 +438,14 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 				create : function(url,ctrlr,data,opts,ctrlAs){
 					var copy = (opts && angular.isDefined(opts.copy)) ? opts.copy : _copy;
 					opts = _setOpts(opts);
+					if(!opts.resolve)
+						opts.resolve = {};
+						opts.resolve.data = function() {
+						if(copy)
+							return angular.copy(data);
+						else
+							return data;
+					};
 
 					return $uibModal.open({
 						templateUrl : url,
@@ -449,14 +457,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 						windowClass: opts.wc,
 						size: opts.ws,
 						animation: opts.anim,
-						resolve : {
-							data : function() {
-								if(copy)
-									return angular.copy(data);
-								else
-									return data;
-							}
-						}
+						resolve : opts.resolve
 					}); // end modal.open
 				} // end create
 
@@ -464,6 +465,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 
 		}]; // end $get
 	}]); // end provider dialogs
+
 //== Dialogs.Main Module =====================================================//
 
 /**

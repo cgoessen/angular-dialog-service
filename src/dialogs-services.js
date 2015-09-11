@@ -120,7 +120,11 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 		}; // end useFontAwesome
 
 
+<<<<<<< HEAD
 		this.$get = ['$uibModal',function ($uibModal){
+=======
+		this.$get = ['$modal',function ($modal){
+>>>>>>> add resolve option for custom modal, remove  as not needed after a dismiss
 
 			return {
 				/**
@@ -257,9 +261,21 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 				 * @param	data 	object
 				 * @param	opts	object
 				 */
+<<<<<<< HEAD
 				create : function(url,ctrlr,data,opts,ctrlAs){
+=======
+				create : function(url,ctrlr,data,opts,resolve){
+>>>>>>> add resolve option for custom modal, remove  as not needed after a dismiss
 					var copy = (opts && angular.isDefined(opts.copy)) ? opts.copy : _copy;
 					opts = _setOpts(opts);
+					if(!resolve)
+						resolve = {};
+					resolve.data = function() {
+						if(copy)
+							return angular.copy(data);
+						else
+							return data;
+					};
 
 					return $uibModal.open({
 						templateUrl : url,
@@ -271,6 +287,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 						windowClass: opts.wc,
 						size: opts.ws,
 						animation: opts.anim,
+<<<<<<< HEAD
 						resolve : {
 							data : function() {
 								if(copy)
@@ -279,6 +296,9 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 									return data;
 							}
 						}
+=======
+						resolve : resolve
+>>>>>>> add resolve option for custom modal, remove  as not needed after a dismiss
 					}); // end modal.open
 				} // end create
 

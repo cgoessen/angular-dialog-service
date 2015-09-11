@@ -85,6 +85,23 @@
           DIALOGS_YES: "Sí",
           DIALOGS_NO: "No"
         });
+        
+        $translateProvider.translations("fr-FR", {
+          DIALOGS_ERROR: "Erreur",
+          DIALOGS_ERROR_MSG: "Une erreur inconnue s'est produite.",
+          DIALOGS_CLOSE: "Fermer",
+          DIALOGS_PLEASE_WAIT: "Patientez svp",
+          DIALOGS_PLEASE_WAIT_ELIPS: "Patienter svp...",
+          DIALOGS_PLEASE_WAIT_MSG: "En attente de la fin de l'opération.",
+          DIALOGS_PERCENT_COMPLETE: "% Terminer",
+          DIALOGS_NOTIFICATION: "Notification",
+          DIALOGS_NOTIFICATION_MSG: "Notification de l'application inconnue",
+          DIALOGS_CONFIRMATION: "Confirmer",
+          DIALOGS_CONFIRMATION_MSG: "Merci de confirmer",
+          DIALOGS_OK: "OK",
+          DIALOGS_YES: "Oui",
+          DIALOGS_NO: "Non"
+        });
 
         $translateProvider.translations("fr-FR", {
           DIALOGS_ERROR: "Erreur",
