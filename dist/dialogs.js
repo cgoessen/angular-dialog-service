@@ -306,7 +306,6 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 
 
 		this.$get = ['$uibModal',function ($uibModal){
-
 			return {
 				/**
 				 * Error Dialog
@@ -323,7 +322,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 							msg : angular.copy(msg),
 							fa : _fa
 						};
-					}
+					};
 
 					return $uibModal.open({
 						templateUrl : '/dialogs/error.html',
@@ -355,7 +354,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 							progress : angular.copy(progress),
 							fa : _fa
 						};
-					}
+					};
 
 					return $uibModal.open({
 						templateUrl : '/dialogs/wait.html',
@@ -385,7 +384,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 							msg : angular.copy(msg),
 							fa : _fa
 						};
-					}
+					};
 
 					return $uibModal.open({
 						templateUrl : '/dialogs/notify.html',
@@ -415,7 +414,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 							msg : angular.copy(msg),
 							fa : _fa
 						};
-					}
+					};
 
 					return $uibModal.open({
 						templateUrl : '/dialogs/confirm.html',

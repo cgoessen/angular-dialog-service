@@ -201,6 +201,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 		var _setOpts = function(opts){
 			var _opts = {};
 			opts = opts || {};
+			_opts.resolve = (angular.isDefined(opts.resolve)) ? opts.resolve : {};
 			_opts.kb = (angular.isDefined(opts.keyboard)) ? !!opts.keyboard : _k; // values: true,false
 			_opts.bd = (angular.isDefined(opts.backdrop)) ? opts.backdrop : _b; // values: 'static',true,false
 			_opts.bdc = (angular.isDefined(opts.backdropClass)) ? opts.backdropClass : _bdc; // additional CSS class(es) to be added to the modal backdrop
@@ -305,7 +306,6 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 
 
 		this.$get = ['$uibModal',function ($uibModal){
-
 			return {
 				/**
 				 * Error Dialog
@@ -316,6 +316,13 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 				 */
 				error : function(header,msg,opts){
 					opts = _setOpts(opts);
+					opts.resolve.data = function(){
+						return {
+							header : angular.copy(header),
+							msg : angular.copy(msg),
+							fa : _fa
+						};
+					};
 
 					return $uibModal.open({
 						templateUrl : '/dialogs/error.html',
@@ -326,15 +333,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 						windowClass: opts.wc,
 						size: opts.ws,
 						animation: opts.anim,
-						resolve : {
-							data : function(){
-								return {
-									header : angular.copy(header),
-									msg : angular.copy(msg),
-									fa : _fa
-								};
-							}
-						}
+						resolve : opts.resolve
 					}); // end modal.open
 				}, // end error
 
@@ -348,6 +347,14 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 				 */
 				wait : function(header,msg,progress,opts){
 					opts = _setOpts(opts);
+					opts.resolve.data = function(){
+						return {
+							header : angular.copy(header),
+							msg : angular.copy(msg),
+							progress : angular.copy(progress),
+							fa : _fa
+						};
+					};
 
 					return $uibModal.open({
 						templateUrl : '/dialogs/wait.html',
@@ -358,16 +365,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 						windowClass: opts.wc,
 						size: opts.ws,
 						animation: opts.anim,
-						resolve : {
-							data : function(){
-								return {
-									header : angular.copy(header),
-									msg : angular.copy(msg),
-									progress : angular.copy(progress),
-									fa : _fa
-								};
-							}
-						}
+						resolve : opts.resolve
 					}); // end modal.open
 				}, // end wait
 
@@ -380,6 +378,13 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 				 */
 				notify : function(header,msg,opts){
 					opts = _setOpts(opts);
+					opts.resolve.data = function(){
+						return {
+							header : angular.copy(header),
+							msg : angular.copy(msg),
+							fa : _fa
+						};
+					};
 
 					return $uibModal.open({
 						templateUrl : '/dialogs/notify.html',
@@ -390,15 +395,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 						windowClass: opts.wc,
 						size: opts.ws,
 						animation: opts.anim,
-						resolve : {
-							data : function(){
-								return {
-									header : angular.copy(header),
-									msg : angular.copy(msg),
-									fa : _fa
-								};
-							}
-						}
+						resolve : opts.resolve
 					}); // end modal.open
 				}, // end notify
 
@@ -411,6 +408,13 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 				 */
 				confirm : function(header,msg,opts){
 					opts = _setOpts(opts);
+					opts.resolve.data = function(){
+						return {
+							header : angular.copy(header),
+							msg : angular.copy(msg),
+							fa : _fa
+						};
+					};
 
 					return $uibModal.open({
 						templateUrl : '/dialogs/confirm.html',
@@ -421,15 +425,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 						windowClass: opts.wc,
 						size: opts.ws,
 						animation: opts.anim,
-						resolve : {
-							data : function(){
-								return {
-									header : angular.copy(header),
-									msg : angular.copy(msg),
-									fa : _fa
-								};
-							}
-						}
+						resolve : opts.resolve
 					}); // end modal.open
 				}, // end confirm
 
@@ -444,6 +440,12 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 				create : function(url,ctrlr,data,opts,ctrlAs){
 					var copy = (opts && angular.isDefined(opts.copy)) ? opts.copy : _copy;
 					opts = _setOpts(opts);
+					opts.resolve.data = function() {
+						if(copy)
+							return angular.copy(data);
+						else
+							return data;
+					};
 
 					return $uibModal.open({
 						templateUrl : url,
@@ -455,14 +457,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 						windowClass: opts.wc,
 						size: opts.ws,
 						animation: opts.anim,
-						resolve : {
-							data : function() {
-								if(copy)
-									return angular.copy(data);
-								else
-									return data;
-							}
-						}
+						resolve : opts.resolve
 					}); // end modal.open
 				} // end create
 
@@ -470,6 +465,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 
 		}]; // end $get
 	}]); // end provider dialogs
+
 //== Dialogs.Main Module =====================================================//
 
 /**
